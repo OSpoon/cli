@@ -1,8 +1,15 @@
 import { cac } from 'cac'
+import Conf from 'conf'
 import { consola } from 'consola'
 import updateNotifier from 'update-notifier'
 import pkg from '../package.json'
 import { addHandler } from './commands/add'
+
+const config = new Conf({})
+
+// 默认示例，暂时仅写入: name: 'cli', version: '0.0.0'
+config.set('name', pkg.name)
+config.set('version', pkg.version)
 
 // Check for updates quietly in the background
 updateNotifier({ pkg: pkg as any }).notify()

@@ -11,6 +11,7 @@ catalog:
   '@clack/prompts': ^1.2.0
   '@types/update-notifier': ^6.0.8
   cac: ^7.0.0
+  conf: ^13.1.0
   consola: ^3.4.2
   picocolors: ^1.1.1
   update-notifier: ^7.3.1
