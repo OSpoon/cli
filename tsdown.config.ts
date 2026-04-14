@@ -5,6 +5,7 @@ import ApiSnapshot from 'tsnapi/rolldown'
 export default defineConfig({
   entry: [
     'src/index.ts',
+    'src/cli.ts',
   ],
   dts: true,
   exports: true,

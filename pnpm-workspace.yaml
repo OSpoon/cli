@@ -2,13 +2,18 @@ catalogMode: prefer
 ignoreWorkspaceRootCheck: true
 shellEmulator: true
 trustPolicy: no-downgrade
-
 packages:
   - playground
   - docs
   - packages/*
   - examples/*
-
+catalog:
+  '@clack/prompts': ^1.2.0
+  '@types/update-notifier': ^6.0.8
+  cac: ^7.0.0
+  consola: ^3.4.2
+  picocolors: ^1.1.1
+  update-notifier: ^7.3.1
 catalogs:
   cli:
     '@antfu/eslint-config': ^8.1.1
