@@ -5,7 +5,7 @@ import updateNotifier from 'update-notifier'
 import pkg from '../package.json'
 import { addHandler } from './commands/add'
 
-const config = new Conf({})
+const config = new Conf({ projectName: pkg.name })
 
 // 默认示例，暂时仅写入: name: 'cli', version: '0.0.0'
 config.set('name', pkg.name)
