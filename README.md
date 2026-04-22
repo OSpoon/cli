@@ -80,6 +80,18 @@ This scaffolding template provides a reference implementation of a typical CLI a
 
 This starter recommends using [npm Trusted Publisher](https://github.com/e18e/ecosystem-issues/issues/201), where the release is done on CI to ensure the security of the packages. To do so, run `pnpm publish` manually for the first time to create the package on npm, then go to `https://www.npmjs.com/package/cli/access` to link your GitHub repo. For future releases, run `pnpm run release` and GitHub Actions will handle the rest.
 
+### Configuration Storage
+
+This template uses [`conf`](https://github.com/sindresorhus/conf) for persistent configuration. The config file is stored at a platform-specific location based on the `projectName` (i.e. the package `name` field):
+
+| Platform | Path |
+| --- | --- |
+| macOS | `~/Library/Preferences/<name>-nodejs/config.json` |
+| Linux | `~/.config/<name>/config.json` |
+| Windows | `%APPDATA%\<name>-nodejs\config.json` |
+
+After running `npx tsx init.ts <new-name>`, the storage path will automatically reflect the new name.
+
 ## License
 
 [MIT](./LICENSE) License © [OSpoon](https://github.com/OSpoon)
