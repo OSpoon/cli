@@ -1,9 +1,12 @@
+import process from 'node:process'
 import { cac } from 'cac'
 import Conf from 'conf'
 import { consola } from 'consola'
+import pc from 'picocolors'
 import updateNotifier from 'update-notifier'
 import pkg from '../package.json'
 import { addHandler } from './commands/add'
+import { suggest } from './utils/suggest'
 
 const config = new Conf({ projectName: pkg.name })
 
@@ -38,5 +41,14 @@ const parsed = cli.parse()
 
 // Prevent silent exits: if no valid command was triggered (and no --help/--version used), display help.
 if (!cli.matchedCommand && !parsed.options.help && !parsed.options.version) {
+  const input = parsed.args[0]
+  if (input) {
+    const commandNames = cli.commands.map(c => c.name).filter(Boolean)
+    const match = suggest(input, commandNames)
+    consola.error(`Unknown command: ${pc.bold(input)}`)
+    if (match)
+      consola.info(`Did you mean ${pc.bold(match)}?`)
+    process.exit(1)
+  }
   cli.outputHelp()
 }
