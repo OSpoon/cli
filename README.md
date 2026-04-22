@@ -47,11 +47,38 @@ $ cli add
 
 ## Note for Developers
 
-This starter recommands using [npm Trusted Publisher](https://github.com/e18e/ecosystem-issues/issues/201), where the release is done on CI to ensure the security of the packages.
+### Project Structure
 
-To do so, you need to run `pnpm publish` manually for the very first time to create the package on npm, and then go to `https://www.npmjs.com/package/cli/access` to set the connection to your GitHub repo.
+```
+src/
+├── core/           # Pure functions — no I/O, no side effects
+│   └── add.ts      # Business logic, independently testable
+├── commands/       # CLI command handlers (interactive layer)
+│   └── add.ts      # Wraps core functions with @clack/prompts UI
+├── utils/          # Shared utilities
+│   └── suggest.ts  # Fuzzy command suggestion via leven
+├── cli.ts          # CLI entry point (cac setup, command registration)
+└── index.ts        # Public API — re-exports from core for programmatic use
+```
 
-Then for the future releases, you can run `pnpm run release` to do the release and the GitHub Actions will take care of the release process.
+The `core/` layer is intentionally decoupled from the CLI. This means you can use the same logic both as a CLI tool and as a library:
+
+```ts
+// Programmatic use
+import { add } from 'cli'
+
+const result = add(1, 2) // 3
+```
+
+When adding a new command, follow this pattern:
+1. Implement the pure logic in `src/core/<name>.ts`
+2. Export it from `src/index.ts`
+3. Add the interactive CLI handler in `src/commands/<name>.ts`, importing from `core/`
+4. Register the command in `src/cli.ts`
+
+This scaffolding template provides a reference implementation of a typical CLI application.
+
+This starter recommends using [npm Trusted Publisher](https://github.com/e18e/ecosystem-issues/issues/201), where the release is done on CI to ensure the security of the packages. To do so, run `pnpm publish` manually for the first time to create the package on npm, then go to `https://www.npmjs.com/package/cli/access` to link your GitHub repo. For future releases, run `pnpm run release` and GitHub Actions will handle the rest.
 
 ## License
 

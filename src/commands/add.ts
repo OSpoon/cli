@@ -2,7 +2,7 @@ import process from 'node:process'
 import { cancel, intro, isCancel, outro, text } from '@clack/prompts'
 import { consola } from 'consola'
 import pc from 'picocolors'
-import { add } from '../index'
+import { add } from '../core/add'
 
 export async function addHandler(aStr?: string, bStr?: string): Promise<void> {
   intro(pc.inverse(' cli template - add command '))
