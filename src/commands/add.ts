@@ -3,6 +3,7 @@ import { cancel, intro, isCancel, outro, text } from '@clack/prompts'
 import { defineCommand } from 'citty'
 import { consola } from 'consola'
 import pc from 'picocolors'
+import pkg from '../../package.json'
 import { add } from '../core/add'
 
 async function promptNumber(message: string): Promise<number> {
@@ -27,7 +28,7 @@ export const addCommand = defineCommand({
     b: { type: 'positional', description: 'Second number', required: false },
   },
   async run({ args }) {
-    intro(pc.inverse(' cli template - add command '))
+    intro(pc.inverse(` ${pkg.name} - add command `))
 
     const numA = args.a && !Number.isNaN(Number(args.a))
       ? Number(args.a)

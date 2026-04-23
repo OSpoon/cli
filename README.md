@@ -52,8 +52,8 @@ $ cli add
 After cloning, run the init script to rename the project:
 
 ```bash
-npx tsx init.ts <new-name>
-# e.g. npx tsx init.ts my-awesome-cli
+npx tsx scripts/init.ts <new-name>
+# e.g. npx tsx scripts/init.ts my-awesome-cli
 ```
 
 This updates `package.json`, `README.md`, and `src/cli.ts` in one step.
@@ -96,7 +96,7 @@ This template uses [`conf`](https://github.com/sindresorhus/conf) for persistent
 | Linux | `~/.config/<name>/config.json` |
 | Windows | `%APPDATA%\<name>-nodejs\config.json` |
 
-After running `npx tsx init.ts <new-name>`, the storage path will automatically reflect the new name.
+After running `npx tsx scripts/init.ts <new-name>`, the storage path will automatically reflect the new name.
 
 ### Publishing
 

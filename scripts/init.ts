@@ -10,8 +10,6 @@
  * 会修改以下文件：
  *   - package.json        name / bin key / homepage / repository.url / bugs
  *   - README.md           标题、安装命令、使用示例、badge 链接
- *   - src/cli.ts          cac() 调用名称
- *   - src/commands/add.ts intro() 中的模板标题
  */
 
 import fs from 'node:fs'
@@ -81,34 +79,6 @@ function updateReadme(root: string, oldName: string, newName: string): void {
   console.log(pc.green('✔'), 'README.md')
 }
 
-/**
- * 更新 src/cli.ts 中 cac() 的参数名称。
- */
-function updateCliTs(root: string, oldName: string, newName: string): void {
-  const filePath = path.join(root, 'src/cli.ts')
-  let content = readFile(filePath)
-
-  // cac('cli') → cac('new-name')
-  content = replaceAll(content, `cac('${oldName}')`, `cac('${newName}')`)
-
-  writeFile(filePath, content)
-  console.log(pc.green('✔'), 'src/cli.ts')
-}
-
-/**
- * 更新 src/commands/add.ts 中 intro() 的标题文字。
- */
-function updateAddTs(root: string, oldName: string, newName: string): void {
-  const filePath = path.join(root, 'src/commands/add.ts')
-  let content = readFile(filePath)
-
-  // ' cli template - add command ' → ' new-name template - add command '
-  content = replaceAll(content, ` ${oldName} template`, ` ${newName} template`)
-
-  writeFile(filePath, content)
-  console.log(pc.green('✔'), 'src/commands/add.ts')
-}
-
 // ─── 入口 ────────────────────────────────────────────────────────────────────
 
 function main(): void {
@@ -143,8 +113,6 @@ function main(): void {
 
   updatePackageJson(root, oldName, newName)
   updateReadme(root, oldName, newName)
-  updateCliTs(root, oldName, newName)
-  updateAddTs(root, oldName, newName)
 
   console.log()
   console.log(pc.green('✔'), `完成！项目名称已更新为 ${pc.bold(newName)}。`)
