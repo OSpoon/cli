@@ -10,16 +10,14 @@ packages:
 catalog:
   '@clack/prompts': ^1.2.0
   '@types/update-notifier': ^6.0.8
-  cac: ^7.0.0
+  citty: ^0.2.2
   conf: ^13.1.0
   consola: ^3.4.2
-  leven: ^4.1.0
   picocolors: ^1.1.1
   update-notifier: ^7.3.1
 catalogs:
   cli:
     '@antfu/eslint-config': ^8.1.1
-    '@antfu/ni': ^30.0.0
     bumpp: ^11.0.1
     eslint: ^10.2.0
     lint-staged: ^16.4.0
@@ -29,8 +27,6 @@ catalogs:
     tsx: ^4.21.0
     typescript: ^6.0.2
     vite: ^8.0.8
-  inlined:
-    '@antfu/utils': ^9.3.0
   testing:
     tsnapi: ^0.1.1
     vitest: ^4.1.4

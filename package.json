@@ -3,7 +3,7 @@
   "type": "module",
   "version": "0.0.0",
   "packageManager": "pnpm@10.33.0",
-  "description": "A modern CLI template powered by TypeScript, cac and clack.",
+  "description": "A modern CLI template powered by TypeScript, citty and clack.",
   "author": "OSpoon <zxin088@gmail.com>",
   "license": "MIT",
   "homepage": "https://github.com/OSpoon/cli#readme",
@@ -41,17 +41,14 @@
   },
   "dependencies": {
     "@clack/prompts": "catalog:",
-    "cac": "catalog:",
+    "citty": "catalog:",
     "conf": "catalog:",
     "consola": "catalog:",
-    "leven": "catalog:",
     "picocolors": "catalog:",
     "update-notifier": "catalog:"
   },
   "devDependencies": {
     "@antfu/eslint-config": "catalog:cli",
-    "@antfu/ni": "catalog:cli",
-    "@antfu/utils": "catalog:inlined",
     "@types/node": "catalog:types",
     "@types/update-notifier": "catalog:",
     "bumpp": "catalog:cli",

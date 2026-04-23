@@ -6,7 +6,7 @@
 [![JSDocs][jsdocs-src]][jsdocs-href]
 [![License][license-src]][license-href]
 
-A modern CLI template powered by TypeScript, cac and clack.
+A modern CLI template powered by TypeScript, citty and clack.
 
 ## Installation
 
@@ -22,7 +22,8 @@ This scaffolding template provides a reference implementation of a typical CLI a
 
 ### Interactive Mode
 
-If you run the CLI without arguments, it provides a fallback guide or an intuitive step-by-step UI to gather required parameters:
+If you run a command without arguments, it triggers a step-by-step prompt UI to gather required parameters:
+
 ```bash
 $ cli add
 # ┌   cli template - add command
@@ -41,11 +42,21 @@ $ cli add
 
 | Option | Description |
 | --- | --- |
-| `--debug` | Enters debug mode, enabling detailed background logging utilizing `consola`. |
-| `-h, --help` | Display full global help usage and command lists. |
-| `-v, --version` | Display the currently installed version dynamically. |
+| `-h, --help` | Display help usage and command list. |
+| `-v, --version` | Display the currently installed version. |
 
 ## Note for Developers
+
+### Rename the Template
+
+After cloning, run the init script to rename the project:
+
+```bash
+npx tsx init.ts <new-name>
+# e.g. npx tsx init.ts my-awesome-cli
+```
+
+This updates `package.json`, `README.md`, and `src/cli.ts` in one step.
 
 ### Project Structure
 
@@ -54,10 +65,8 @@ src/
 ├── core/           # Pure functions — no I/O, no side effects
 │   └── add.ts      # Business logic, independently testable
 ├── commands/       # CLI command handlers (interactive layer)
-│   └── add.ts      # Wraps core functions with @clack/prompts UI
-├── utils/          # Shared utilities
-│   └── suggest.ts  # Fuzzy command suggestion via leven
-├── cli.ts          # CLI entry point (cac setup, command registration)
+│   └── add.ts      # defineCommand + @clack/prompts UI, imports from core/
+├── cli.ts          # CLI entry point — assembles subCommands via citty
 └── index.ts        # Public API — re-exports from core for programmatic use
 ```
 
@@ -71,18 +80,15 @@ const result = add(1, 2) // 3
 ```
 
 When adding a new command, follow this pattern:
+
 1. Implement the pure logic in `src/core/<name>.ts`
 2. Export it from `src/index.ts`
-3. Add the interactive CLI handler in `src/commands/<name>.ts`, importing from `core/`
-4. Register the command in `src/cli.ts`
-
-This scaffolding template provides a reference implementation of a typical CLI application.
-
-This starter recommends using [npm Trusted Publisher](https://github.com/e18e/ecosystem-issues/issues/201), where the release is done on CI to ensure the security of the packages. To do so, run `pnpm publish` manually for the first time to create the package on npm, then go to `https://www.npmjs.com/package/cli/access` to link your GitHub repo. For future releases, run `pnpm run release` and GitHub Actions will handle the rest.
+3. Define the command with `defineCommand` in `src/commands/<name>.ts`, importing from `core/`
+4. Register it in `src/cli.ts` under `subCommands`
 
 ### Configuration Storage
 
-This template uses [`conf`](https://github.com/sindresorhus/conf) for persistent configuration. The config file is stored at a platform-specific location based on the `projectName` (i.e. the package `name` field):
+This template uses [`conf`](https://github.com/sindresorhus/conf) for persistent configuration. The config file is stored at a platform-specific location based on the package `name` field:
 
 | Platform | Path |
 | --- | --- |
@@ -91,6 +97,10 @@ This template uses [`conf`](https://github.com/sindresorhus/conf) for persistent
 | Windows | `%APPDATA%\<name>-nodejs\config.json` |
 
 After running `npx tsx init.ts <new-name>`, the storage path will automatically reflect the new name.
+
+### Publishing
+
+This starter recommends using [npm Trusted Publisher](https://github.com/e18e/ecosystem-issues/issues/201), where the release is done on CI to ensure the security of the packages. To do so, run `pnpm publish` manually for the first time to create the package on npm, then go to `https://www.npmjs.com/package/cli/access` to link your GitHub repo. For future releases, run `pnpm run release` and GitHub Actions will handle the rest.
 
 ## License
 
