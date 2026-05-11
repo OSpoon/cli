@@ -1,7 +1,7 @@
 import { defineCommand, runMain } from 'citty'
 import Conf from 'conf'
 import updateNotifier from 'update-notifier'
-import pkg from '../package.json'
+import pkg from '~/package.json'
 import { addCommand } from './commands/add'
 
 const config = new Conf({ projectName: pkg.name })

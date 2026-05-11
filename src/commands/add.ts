@@ -3,8 +3,8 @@ import { cancel, intro, isCancel, outro, text } from '@clack/prompts'
 import { defineCommand } from 'citty'
 import { consola } from 'consola'
 import pc from 'picocolors'
-import pkg from '../../package.json'
-import { add } from '../core/add'
+import { add } from '@/core/add'
+import pkg from '~/package.json'
 
 async function promptNumber(message: string): Promise<number> {
   const res = await text({

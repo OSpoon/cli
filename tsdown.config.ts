@@ -1,3 +1,4 @@
+import path from 'node:path'
 import process from 'node:process'
 import { defineConfig } from 'tsdown'
 import ApiSnapshot from 'tsnapi/rolldown'
@@ -7,6 +8,10 @@ export default defineConfig({
     'src/index.ts',
     'src/cli.ts',
   ],
+  alias: {
+    '@': path.resolve('./src'),
+    '~': path.resolve('.'),
+  },
   dts: true,
   exports: true,
   publint: true,
