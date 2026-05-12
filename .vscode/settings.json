@@ -34,5 +34,9 @@
     "json",
     "jsonc",
     "yaml"
-  ]
+  ],
+
+  // Use workspace TypeScript (keeps tsserver in sync with tsc)
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true
 }
