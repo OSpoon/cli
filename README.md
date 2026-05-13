@@ -37,6 +37,7 @@ $ cli add
 | Command | Description |
 | --- | --- |
 | `cli add [a] [b]` | Adds two numbers. If `a` or `b` is omitted, it triggers prompt inputs. |
+| `cli doctor [--json]` | Prints system, runtime, and configuration diagnostics. |
 
 ### Global Options
 
@@ -62,12 +63,13 @@ This updates `package.json`, `README.md`, and `src/cli.ts` in one step.
 
 ```
 src/
+├── commands/       # Command registration only: defineCommand + calls
 ├── core/           # Pure functions — no I/O, no side effects
-│   └── add.ts      # Business logic, independently testable
-├── commands/       # CLI command handlers (interactive layer)
-│   └── add.ts      # defineCommand + @clack/prompts UI, imports from core/
+├── utils/          # Reusable CLI utilities, such as prompt helpers
 ├── cli.ts          # CLI entry point — assembles subCommands via citty
-└── index.ts        # Public API — re-exports from core for programmatic use
+├── config.ts       # Base configuration storage factory and defaults
+├── doctor.ts       # System and configuration diagnostics collection
+└── index.ts        # Public API — programmatic exports
 ```
 
 The `core/` layer is intentionally decoupled from the CLI. This means you can use the same logic both as a CLI tool and as a library:
@@ -79,12 +81,17 @@ import { add } from 'cli'
 const result = add(1, 2) // 3
 ```
 
+### Included Utilities
+
+This template includes [`date-fns`](https://date-fns.org/) for date formatting, parsing, and date arithmetic, and [`es-toolkit`](https://es-toolkit.dev/) for general-purpose collection/object utilities. Prefer these dependencies over adding broad custom helpers to the template. Keep project-specific parsing or validation functions local when the behavior is part of the CLI contract.
+
 When adding a new command, follow this pattern:
 
 1. Implement the pure logic in `src/core/<name>.ts`
 2. Export it from `src/index.ts`
-3. Define the command with `defineCommand` in `src/commands/<name>.ts`, importing from `core/`
-4. Register it in `src/cli.ts` under `subCommands`
+3. Put reusable impure helpers in `src/utils/` or a focused top-level module such as `src/doctor.ts`
+4. Define the command with `defineCommand` in `src/commands/<name>.ts`, keeping it to registration and function calls
+5. Register it in `src/commands/index.ts`
 
 ### Configuration Storage
 

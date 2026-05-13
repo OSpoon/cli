@@ -1,22 +1,10 @@
-import process from 'node:process'
-import { cancel, intro, isCancel, outro, text } from '@clack/prompts'
+import { intro, outro } from '@clack/prompts'
 import { defineCommand } from 'citty'
 import { consola } from 'consola'
 import pc from 'picocolors'
 import { add } from '@/core/add'
+import { readNumberArgument } from '@/utils/args'
 import pkg from '~/package.json'
-
-async function promptNumber(message: string): Promise<number> {
-  const res = await text({
-    message,
-    validate: value => Number.isNaN(Number(value)) ? 'Please enter a valid number' : undefined,
-  })
-  if (isCancel(res)) {
-    cancel('Operation cancelled.')
-    process.exit(0)
-  }
-  return Number(res)
-}
 
 export const addCommand = defineCommand({
   meta: {
@@ -30,13 +18,8 @@ export const addCommand = defineCommand({
   async run({ args }) {
     intro(pc.inverse(` ${pkg.name} - add command `))
 
-    const numA = args.a && !Number.isNaN(Number(args.a))
-      ? Number(args.a)
-      : await promptNumber('Enter the first number:')
-
-    const numB = args.b && !Number.isNaN(Number(args.b))
-      ? Number(args.b)
-      : await promptNumber('Enter the second number:')
+    const numA = await readNumberArgument(args.a, 'Enter the first number:')
+    const numB = await readNumberArgument(args.b, 'Enter the second number:')
 
     const result = add(numA, numB)
     consola.success(`${numA} + ${numB} = ${pc.green(result)}`)

@@ -1,13 +1,11 @@
 import { defineCommand, runMain } from 'citty'
-import Conf from 'conf'
 import updateNotifier from 'update-notifier'
 import pkg from '~/package.json'
-import { addCommand } from './commands/add'
+import { subCommands } from './commands'
+import { createConfig, seedConfig } from './config'
 
-const config = new Conf({ projectName: pkg.name })
-
-config.set('name', pkg.name)
-config.set('version', pkg.version)
+const config = createConfig()
+seedConfig(config)
 
 updateNotifier({ pkg: pkg as any }).notify()
 
@@ -17,9 +15,7 @@ const main = defineCommand({
     version: pkg.version,
     description: pkg.description,
   },
-  subCommands: {
-    add: addCommand,
-  },
+  subCommands,
 })
 
 runMain(main)

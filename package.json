@@ -43,8 +43,11 @@
   "dependencies": {
     "@clack/prompts": "catalog:",
     "citty": "catalog:",
+    "cli-table3": "catalog:",
     "conf": "catalog:",
     "consola": "catalog:",
+    "date-fns": "catalog:",
+    "es-toolkit": "catalog:",
     "picocolors": "catalog:",
     "update-notifier": "catalog:"
   },
