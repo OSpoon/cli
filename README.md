@@ -26,7 +26,7 @@ If you run a command without arguments, it triggers a step-by-step prompt UI to 
 
 ```bash
 $ cli add
-# ┌   cli template - add command
+# ┌   cli - add command
 # │
 # ◇  Enter the first number:
 # │  ...
@@ -57,7 +57,7 @@ npx tsx scripts/init.ts <new-name>
 # e.g. npx tsx scripts/init.ts my-awesome-cli
 ```
 
-This updates `package.json`, `README.md`, and `src/cli.ts` in one step.
+This updates `package.json` and `README.md` in one step.
 
 ### Project Structure
 
@@ -111,7 +111,7 @@ This starter recommends using [npm Trusted Publisher](https://github.com/e18e/ec
 
 ## License
 
-[MIT](./LICENSE) License © [OSpoon](https://github.com/OSpoon)
+[MIT](./LICENSE.md) License © [OSpoon](https://github.com/OSpoon)
 
 <!-- Badges -->
 
@@ -122,6 +122,6 @@ This starter recommends using [npm Trusted Publisher](https://github.com/e18e/ec
 [bundle-src]: https://img.shields.io/bundlephobia/minzip/cli?style=flat&colorA=080f12&colorB=1fa669&label=minzip
 [bundle-href]: https://bundlephobia.com/result?p=cli
 [license-src]: https://img.shields.io/github/license/OSpoon/cli.svg?style=flat&colorA=080f12&colorB=1fa669
-[license-href]: https://github.com/OSpoon/cli/blob/main/LICENSE
+[license-href]: https://github.com/OSpoon/cli/blob/main/LICENSE.md
 [jsdocs-src]: https://img.shields.io/badge/jsdocs-reference-080f12?style=flat&colorA=080f12&colorB=1fa669
 [jsdocs-href]: https://www.jsdocs.io/package/cli
